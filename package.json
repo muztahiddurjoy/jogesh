@@ -10,7 +10,8 @@
     "firebase": "^9.6.0"
   },
   "scripts": {
-    "test": "build"
+    "test": "build",
+    "start": "node index.js"
   },
   "keywords": [
     "gali"

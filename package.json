@@ -1,0 +1,20 @@
+{
+  "name": "%gali @Ajlan",
+  "version": "1.0.0",
+  "description": "This is a try to make a gali bot",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "discord.js": "^13.3.1",
+    "dotenv": "^10.0.0",
+    "firebase": "^9.6.0"
+  },
+  "scripts": {
+    "test": "build"
+  },
+  "keywords": [
+    "gali"
+  ],
+  "author": "Muztahid Durjoy",
+  "license": "ISC"
+}

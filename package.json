@@ -16,5 +16,8 @@
     "gali"
   ],
   "author": "Muztahid Durjoy",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": "16.13.1"
+  }
 }

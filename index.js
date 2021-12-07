@@ -9,7 +9,6 @@ client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   axios.get('https://galibotcord-default-rtdb.firebaseio.com/galis.json').then((res)=>{
     galis = Object.values(res.data)
-    console.log(galis)
   }).catch((e)=>{
     console.log(e)
   })
@@ -28,6 +27,11 @@ client.on('messageCreate', message => {
       message.reply(`The gali ${t.substr(8,t.length)} has been added to the dictionary`)
     }).catch((e)=>{
       message.reply(e)
+    })
+    axios.get('https://galibotcord-default-rtdb.firebaseio.com/galis.json').then((res)=>{
+    galis = Object.values(res.data)
+    }).catch((e)=>{
+      console.log(e)
     })
   }
  /* else if(t.includes("")){

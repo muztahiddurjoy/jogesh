@@ -7,9 +7,8 @@ require('dotenv').config()
 let galis = []
 client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  axios.get('https://galibotcord-default-rtdb.firebaseio.com/galis.json').then((res)=>{
+  axios.get(`${process.env.FIREBASE_LINK}.json`).then((res)=>{
     galis = Object.values(res.data)
-    console.log(galis)
   }).catch((e)=>{
     console.log(e)
   })
@@ -27,7 +26,7 @@ client.on('messageCreate', message => {
     }
   }
   else if(t.includes('%welcome')){
-    message.reply(`Welcome lodu ${t.substr(8,t.length)}`)
+    message.reply(`গালির রাজ্যে আপনাকে স্বাগতম${t.substr(8,t.length)}`)
   }
   else if(t.includes('%tornado')){
     if(message.author.id == '544406696563572739'){
@@ -40,7 +39,7 @@ client.on('messageCreate', message => {
     }
   }
   else if(t.includes('%addgali')){
-    axios.put(`https://galibotcord-default-rtdb.firebaseio.com/galis/${new Date().getTime()}.json`,{gali:t.substr(8,t.length),author: message.author.username}).then(()=>{
+    axios.put(`${process.env.FIREBASE_LINK}/${new Date().getTime()}.json`,{gali:t.substr(8,t.length),author: message.author.username}).then(()=>{
       message.reply(`The gali ${t.substr(8,t.length)} has been added to the dictionary`)
     }).catch((e)=>{
       message.reply(e)

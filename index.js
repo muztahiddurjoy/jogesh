@@ -29,8 +29,8 @@ client.on('messageCreate', async message => {
         message.reply(`Hopp beda\n<@!${message.author.id}> ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`) 
     }
     else{
-        //message.reply(`${target} ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`)
-      message.reply('tor baaper chakor ami?')
+        message.reply(`${target} ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`)
+    //  message.reply('tor baaper chakor ami?')
     }
   }
 

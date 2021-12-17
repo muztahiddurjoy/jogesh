@@ -38,8 +38,20 @@ client.on('messageCreate', message => {
     //gali command
   if(t.includes('%gali')){
     let target = t.substr(5,t.length)
-    if(target.toLowerCase().includes("durjoy") || target.toLowerCase().includes("botjoy") || target.toLowerCase().includes('<@!917045708203380766>') || target.toLowerCase().includes('<@!544406696563572739>')){
+    if(target.toLowerCase().includes("durjoy")){
         message.reply(`Hopp beda\n<@!${message.author.id}> ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`) 
+    }
+    else if(target.toLowerCase().includes("botjoy")){
+      message.reply(`Hopp beda\n<@!${message.author.id}> ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`) 
+    }
+    else if(target.toLowerCase().includes("muztahid")){
+      message.reply(`Hopp beda\n<@!${message.author.id}> ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`) 
+    }
+    else if (target.toLowerCase().includes('<@!917045708203380766>')){
+      message.reply(`Hopp beda\n<@!${message.author.id}> ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`) 
+    }
+    else if( target.toLowerCase().includes('<@!544406696563572739>')){
+      message.reply(`Hopp beda\n<@!${message.author.id}> ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`) 
     }
     else{
         message.reply(`${target} ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`)

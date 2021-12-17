@@ -85,7 +85,7 @@ client.on('messageCreate', message => {
   //addgali command
   else if(t.includes('%addgali')){ 
     addgali(t,message).catch((e)=>{
-      console.log(e)
+      //console.log(e)
     })
   }
   //semi tornado command

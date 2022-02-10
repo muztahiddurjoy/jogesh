@@ -1,7 +1,9 @@
 const { default: axios } = require('axios');
 const { Client, Intents, MessageAttachment } = require('discord.js');
 const client = new Client({intents: 4609});
+const { TextChannel } = require('discord.js')
 const fetch = require('node-fetch')
+const art = require('ascii-art')
 require('dotenv').config()
 
 //main gali array
@@ -34,7 +36,9 @@ client.once('ready', () => {
 client.on('messageCreate', message => {
     const t = message.content;
 
-    console.log(message.author.id)
+    console.log(message.channelId)
+    // const channel = client.channels.cache.get('886494812566605846').send(`@qt ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`);
+    //console.log(channel)
     //gali command
   if(t.includes('%gali')){
     let target = t.substr(5,t.length)
@@ -72,6 +76,7 @@ client.on('messageCreate', message => {
         message.reply(`${t.substr(8,t.length)} ${v.gali}`)
       })
     }
+ 
     // else if(message.author.discriminator = '5291'){
     //   galis.map((v,i)=>{
     //     message.reply(`${t.substr(8,t.length)} ${v.gali}`)
@@ -99,6 +104,7 @@ client.on('messageCreate', message => {
         message.reply('tor baaper chakor ami?')
     }
   }
+  
   //meme send command
   // else if(t.includes('%meme')){
   // axios.get('https://meme-api.herokuapp.com/gimme').then(res =>{
@@ -114,6 +120,19 @@ client.on('messageCreate', message => {
   else if(t.includes('%amount')){
     message.reply(`total: ${galis.length} gali(s)`)
   } 
+  else if(t.includes('jogesh init')){
+    const arr = ["Togo","Mare","Chudi"]
+    arr.map((v,i)=>{
+      art.font(v, 'doom')
+      .then((rendered)=>{
+        const channelid = message.channelId
+        client.channels.cache.get(channelid.toString()).send(`\`\`\`${rendered}\`\`\``)
+      }).catch((err)=>{
+          //err is an error
+      });
+    })
+    
+  }
 });
 
 client.login(process.env.BOT_TOKEN);

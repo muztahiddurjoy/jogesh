@@ -35,14 +35,19 @@ client.once('ready', () => {
 
 client.on('messageCreate', message => {
     const t = message.content;
-
-    console.log(message.channelId)
+    
+    if(message.author.id === "967660170572341258"){
+      message.react("👍")
+    }
     // const channel = client.channels.cache.get('886494812566605846').send(`@qt ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`);
     //console.log(channel)
     //gali command
   if(t.includes('%gali')){
     let target = t.substr(5,t.length)
-    if(target.toLowerCase().includes("durjoy")){
+    if(target.toLowerCase().includes("joya") || target.toLowerCase().includes("jobayda")){
+      message.reply('Khaiya daiya kaam nai?')
+    }
+    else if(target.toLowerCase().includes("durjoy")){
         message.reply(`Hopp beda\n<@!${message.author.id}> ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`) 
     }
     else if(target.toLowerCase().includes("botjoy")){
@@ -58,7 +63,8 @@ client.on('messageCreate', message => {
       message.reply(`Hopp beda\n<@!${message.author.id}> ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`) 
     }
     else{
-        message.reply(`${target} ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`)
+        message.react('😉')
+        message.channel.send(`${target} ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`)
     }
   }
 
@@ -120,6 +126,18 @@ client.on('messageCreate', message => {
   else if(t.includes('%amount')){
     message.reply(`total: ${galis.length} gali(s)`)
   } 
+  else if(t.includes("%command1")){
+    const arr = ["J","O","Y","A","C","U","T","U"]
+    arr.map((v,i)=>{
+      art.font(v, 'doom')
+      .then(async (rendered)=>{
+        const channelid = message.channelId
+        await client.channels.cache.get(channelid.toString()).send(`\`\`\`${rendered}\`\`\``)
+      }).catch((err)=>{
+          //err is an error
+      });
+    })
+  }
   else if(t.includes('jogesh init')){
     const arr = ["Togo","Mare","Chudi"]
     arr.map((v,i)=>{

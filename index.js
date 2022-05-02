@@ -4,7 +4,7 @@ const client = new Client({intents: 4609});
 const { TextChannel } = require('discord.js')
 const fetch = require('node-fetch')
 const art = require('ascii-art')
-require('dotenv').config()
+// require('dotenv').config()
 
 //main gali array
 let galis = []
@@ -38,6 +38,25 @@ client.on('messageCreate', message => {
     
     if(message.author.id === "967660170572341258"){
       message.react("👍")
+      // let str = "Hmm"
+      // for (let i = 0; i < Math.floor(Math.random()*10); i++) {
+      //   str+="m"
+      // }
+      // message.reply(str)
+    }
+    if(message.author.id === "967661362132189185"){
+      message.react("💕")
+      // message.reply("Apo apni cutu💕")
+    }
+    if(message.content.includes("917045708203380766")){
+      if(message.author.id === "544406696563572739"){
+        message.channel.send("Ji sir")
+      }
+      else if(message.author.id === "967661362132189185"){
+        message.channel.send("Ji madam")
+      }
+      else{
+      message.channel.send("Kisse")}
     }
     // const channel = client.channels.cache.get('886494812566605846').send(`@qt ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`);
     //console.log(channel)

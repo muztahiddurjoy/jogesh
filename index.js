@@ -6,7 +6,7 @@ const client = new Client({intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_VO
 const { TextChannel } = require('discord.js')
 const fetch = require('node-fetch')
 const art = require('ascii-art')
-require('dotenv').config()
+// require('dotenv').config()
 
 //main gali array
 let galis = []

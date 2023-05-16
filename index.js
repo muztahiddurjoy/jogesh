@@ -1,10 +1,12 @@
 const { default: axios } = require('axios');
 const { Client, Intents, MessageAttachment } = require('discord.js');
-const client = new Client({intents: 4609});
+const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus, VoiceConnectionStatus } = require('@discordjs/voice');
+
+const client = new Client({intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_VOICE_STATES,Intents.FLAGS.GUILD_MESSAGES]});
 const { TextChannel } = require('discord.js')
 const fetch = require('node-fetch')
 const art = require('ascii-art')
-// require('dotenv').config()
+require('dotenv').config()
 
 //main gali array
 let galis = []
@@ -33,7 +35,7 @@ client.once('ready', () => {
   reloadgali().catch(e => console.log(e))
 });
 
-client.on('messageCreate', message => {
+client.on('messageCreate', async message => {
     const t = message.content;
     
     if(message.author.id === "967660170572341258"){
@@ -66,10 +68,23 @@ client.on('messageCreate', message => {
     if(target.toLowerCase().includes("joya") || target.toLowerCase().includes("jobayda")){
       message.reply('Khaiya daiya kaam nai?')
     }
+    else if(message.guildId=="1102917645579321415"){
+      if(message.author.id=="851753629149167657" || message.author.id=="544406696563572739" || message.author.id=="584309117380853770"){
+        message.react('🗿')
+        message.channel.send(`${target} ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`)
+      }
+      else{
+        message.react('🤡')
+        message.reply('Shob command shobar jonno na baba')
+      }
+    }
     else if(target.toLowerCase().includes("durjoy")){
         message.reply(`Hopp beda\n<@!${message.author.id}> ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`) 
     }
     else if(target.toLowerCase().includes("botjoy")){
+      message.reply(`Hopp beda\n<@!${message.author.id}> ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`) 
+    }
+    else if(target.includes('দুর্জয়')){
       message.reply(`Hopp beda\n<@!${message.author.id}> ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`) 
     }
     else if(target.toLowerCase().includes("muztahid")){
@@ -82,11 +97,63 @@ client.on('messageCreate', message => {
       message.reply(`Hopp beda\n<@!${message.author.id}> ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`) 
     }
     else{
-        message.react('😉')
+        message.react('🐄')
         message.channel.send(`${target} ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`)
     }
   }
 
+  if(t.includes('%moan')){
+    const voiceChannel = message.member?.voice.channel;
+    if (!voiceChannel) {
+      return message.reply('You need to be in a voice channel to use this command!');
+    }
+    // Join the voice channel
+    const connection = joinVoiceChannel({
+      channelId: voiceChannel.id,
+      guildId: voiceChannel.guild.id,
+      adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+    });
+
+    // Play a sound
+    const player = createAudioPlayer();
+    const resource = createAudioResource(`${__dirname}/assets/audio/moan.mp3`);
+    connection.subscribe(player);
+    player.play(resource);
+
+    // Handle errors and cleanup
+    player.on('idle', () => {
+      connection.destroy();
+    });
+    connection.on('disconnect', () => {
+      player.stop();
+    });
+  }
+  if(t.includes('%moan wafi')){
+    const voiceChannel = message.member?.voice.channel;
+    if (!voiceChannel) {
+      return message.reply('You need to be in a voice channel to use this command!');
+    }
+    // Join the voice channel
+    const connection = joinVoiceChannel({
+      channelId: voiceChannel.id,
+      guildId: voiceChannel.guild.id,
+      adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+    });
+
+    // Play a sound
+    const player = createAudioPlayer();
+    const resource = createAudioResource(`${__dirname}/assets/audio/wafimoan.mp3`);
+    connection.subscribe(player);
+    player.play(resource);
+
+    // Handle errors and cleanup
+    player.on('idle', () => {
+      connection.destroy();
+    });
+    connection.on('disconnect', () => {
+      player.stop();
+    });
+  }
 
   //welcome command
   else if(t.includes('%welcome')){
@@ -96,7 +163,7 @@ client.on('messageCreate', message => {
 
   //tornado command
   else if(t.includes('%tornado')){
-    if(message.author.id == '544406696563572739'){
+    if(message.author.id == '544406696563572739' || message.author.id == "851753629149167657" || message.author.id == "858605545266348052"){
       galis.map((v,i)=>{
         message.reply(`${t.substr(8,t.length)} ${v.gali}`)
       })

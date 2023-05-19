@@ -6,7 +6,7 @@ const client = new Client({intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_VO
 const { TextChannel } = require('discord.js')
 const fetch = require('node-fetch')
 const art = require('ascii-art')
-// require('dotenv').config()
+require('dotenv').config()
 
 //main gali array
 let galis = []
@@ -134,6 +134,15 @@ client.on('messageCreate', async message => {
       return message.reply('You need to be in a voice channel to use this command!');
     }
     // Join the voice channel
+    const player = createAudioPlayer();
+    const moan1 = createAudioResource(`${__dirname}/assets/audio/wafi1.mp3`);
+    const moan2 = createAudioResource(`${__dirname}/assets/audio/wafi2.mp3`);
+    const moan3 = createAudioResource(`${__dirname}/assets/audio/wafi3.mp3`);
+    const moan4 = createAudioResource(`${__dirname}/assets/audio/wafi4.mp3`);
+    const moan5 = createAudioResource(`${__dirname}/assets/audio/wafi5.mp3`);
+    const moan6 = createAudioResource(`${__dirname}/assets/audio/wafi6.mp3`);
+   
+    const moans = [moan1,moan2,moan3,moan4,moan5,moan6]
     const connection = joinVoiceChannel({
       channelId: voiceChannel.id,
       guildId: voiceChannel.guild.id,
@@ -141,10 +150,9 @@ client.on('messageCreate', async message => {
     });
 
     // Play a sound
-    const player = createAudioPlayer();
-    const resource = createAudioResource(`${__dirname}/assets/audio/wafimoan.mp3`);
+    
     connection.subscribe(player);
-    player.play(resource);
+    player.play(moans[Math.floor(Math.random() * (moans.length - 0))]);
 
     // Handle errors and cleanup
     player.on('idle', () => {

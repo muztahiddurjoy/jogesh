@@ -1,11 +1,13 @@
 const { default: axios } = require('axios');
 const { Client, Intents, MessageAttachment } = require('discord.js');
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus, VoiceConnectionStatus } = require('@discordjs/voice');
-
+const express = require('express')
 const client = new Client({intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_VOICE_STATES,Intents.FLAGS.GUILD_MESSAGES]});
 const { TextChannel } = require('discord.js')
 const fetch = require('node-fetch')
 const art = require('ascii-art')
+const app = express()
+const PORT = process.env.PORT | 300
 require('dotenv').config()
 
 //main gali array
@@ -171,7 +173,7 @@ client.on('messageCreate', async message => {
 
   //tornado command
   else if(t.includes('%tornado')){
-    if(message.author.id == '544406696563572739' || message.author.id == "851753629149167657" || message.author.id == "858605545266348052"){
+    if(message.author.discriminator == '8573' || message.author.id == "851753629149167657" || message.author.id == "858605545266348052"){
       galis.map((v,i)=>{
         message.reply(`${t.substr(8,t.length)} ${v.gali}`)
       })
@@ -247,4 +249,11 @@ client.on('messageCreate', async message => {
   }
 });
 
+app.get('/',(req,res)=>{
+  res.status(200).json({suck:'Sex'})
+})
+
+
 client.login(process.env.BOT_TOKEN);
+app.listen(PORT,()=> console.log('Server started🔥'))
+

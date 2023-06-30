@@ -1,17 +1,22 @@
 
 import {PrismaClient} from '@prisma/client'
-import firebase from '../backup/firebase.json'
+import { Message } from 'discord.js'
 const prisma = new PrismaClient()
-console.log(firebase)
-const addGali = async (t:string,message:string) =>{
-    // await axios.put(`${process.env.FIREBASE_LINK}/${new Date().getTime()}.json`,{gali:t.substr(8,t.length),author: message.author.username}).then(()=>{
-    //     reloadgali().then(()=>{
-    //       message.reply(`The gali ${t.substr(8,t.length)} has been added to the dictionary`)
-    //     }).catch((e)=>{
-    //       console.log(e)
-    //     })
-    //   }).catch((e)=>{
-    //     message.reply(e)
-    //   })
+
+const addGali = (t:string,message:Message<boolean>) =>{
+
+    prisma.gali.create({
+        data:{
+            author: message.author.username,
+            discriminator: +message.author.discriminator,
+            gali: t.substring(8,t.length),
+            photo: message.author.avatarURL({format:'jpeg'}) || '',
+        }
+    }).then(()=>{
+        message.reply(`The gali ${t.substring(8,t.length)} has been added to the dictionary`)
+    }).catch((err)=>{
+        console.log(err)
+        message.reply('Sorry bro! try again')
+    })
 }
 export default addGali

@@ -12,17 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const axios_1 = __importDefault(require("axios"));
+const client_1 = require("@prisma/client");
+const firebase_json_1 = __importDefault(require("../backup/firebase.json"));
+const prisma = new client_1.PrismaClient();
+console.log(firebase_json_1.default);
 const addGali = (t, message) => __awaiter(void 0, void 0, void 0, function* () {
-    yield axios_1.default.put(`${process.env.FIREBASE_LINK}/${new Date().getTime()}.json`, { gali: t.substr(8, t.length), author: message.author.username }).then(() => {
-        reloadgali().then(() => {
-            message.reply(`The gali ${t.substr(8, t.length)} has been added to the dictionary`);
-        }).catch((e) => {
-            console.log(e);
-        });
-    }).catch((e) => {
-        message.reply(e);
+    prisma.gali.create({
+        data: {
+            author: 
+        }
     });
+    // await axios.put(`${process.env.FIREBASE_LINK}/${new Date().getTime()}.json`,{gali:t.substr(8,t.length),author: message.author.username}).then(()=>{
+    //     reloadgali().then(()=>{
+    //       message.reply(`The gali ${t.substr(8,t.length)} has been added to the dictionary`)
+    //     }).catch((e)=>{
+    //       console.log(e)
+    //     })
+    //   }).catch((e)=>{
+    //     message.reply(e)
+    //   })
 });
 exports.default = addGali;
 //# sourceMappingURL=addGali.js.map

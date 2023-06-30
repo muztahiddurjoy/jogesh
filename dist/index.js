@@ -1,28 +1,26 @@
-import axios from "axios";
-import { Client, Intents, MessageAttachment } from "discord.js";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const discord_js_1 = require("discord.js");
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus, VoiceConnectionStatus } = require('@discordjs/voice');
-import express,{Request,Response} from 'express'
-import art from 'ascii-art'
-import fetch from 'node-fetch'
-import env from 'dotenv'
-const client:Client = new Client({intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_VOICE_STATES,Intents.FLAGS.GUILD_MESSAGES]});
-const { TextChannel } = require('discord.js')
-const app = express()
-const PORT:any = process.env.PORT? process.env.PORT : 3000
-env.config()
-import { Gali } from "./types/gali";
+const express_1 = __importDefault(require("express"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const client = new discord_js_1.Client({ intents: [discord_js_1.Intents.FLAGS.GUILDS, discord_js_1.Intents.FLAGS.GUILD_VOICE_STATES, discord_js_1.Intents.FLAGS.GUILD_MESSAGES] });
+const { TextChannel } = require('discord.js');
+const app = (0, express_1.default)();
+const PORT = process.env.PORT ? process.env.PORT : 3000;
+dotenv_1.default.config();
 //main gali array
-let galis:Gali = []
-
-
+let galis = [];
 client.once('ready', () => {
-  console.log(`Logged in as ${client.user?.tag}!`);
-  // reloadgali().catch(e => console.log(e))
+    var _a;
+    console.log(`Logged in as ${(_a = client.user) === null || _a === void 0 ? void 0 : _a.tag}!`);
+    // reloadgali().catch(e => console.log(e))
 });
-
 // client.on('messageCreate', async message => {
 //     const t = message.content;
-    
 //     if(message.author.id === "967660170572341258"){
 //       message.react("👍")
 //       // let str = "Hmm"
@@ -86,7 +84,6 @@ client.once('ready', () => {
 //         message.channel.send(`${target} ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`)
 //     }
 //   }
-
 //   if(t.includes('%moan')){
 //     const voiceChannel = message.member?.voice.channel;
 //     if (!voiceChannel) {
@@ -98,13 +95,11 @@ client.once('ready', () => {
 //       guildId: voiceChannel.guild.id,
 //       adapterCreator: voiceChannel.guild.voiceAdapterCreator,
 //     });
-
 //     // Play a sound
 //     const player = createAudioPlayer();
 //     const resource = createAudioResource(`${__dirname}/assets/audio/moan.mp3`);
 //     connection.subscribe(player);
 //     player.play(resource);
-
 //     // Handle errors and cleanup
 //     player.on('idle', () => {
 //       connection.destroy();
@@ -126,19 +121,15 @@ client.once('ready', () => {
 //     const moan4 = createAudioResource(`${__dirname}/assets/audio/wafi4.mp3`);
 //     const moan5 = createAudioResource(`${__dirname}/assets/audio/wafi5.mp3`);
 //     const moan6 = createAudioResource(`${__dirname}/assets/audio/wafi6.mp3`);
-   
 //     const moans = [moan1,moan2,moan3,moan4,moan5,moan6]
 //     const connection = joinVoiceChannel({
 //       channelId: voiceChannel.id,
 //       guildId: voiceChannel.guild.id,
 //       adapterCreator: voiceChannel.guild.voiceAdapterCreator,
 //     });
-
 //     // Play a sound
-    
 //     connection.subscribe(player);
 //     player.play(moans[Math.floor(Math.random() * (moans.length - 0))]);
-
 //     // Handle errors and cleanup
 //     player.on('idle', () => {
 //       connection.destroy();
@@ -147,13 +138,10 @@ client.once('ready', () => {
 //       player.stop();
 //     });
 //   }
-
 //   //welcome command
 //   else if(t.includes('%welcome')){
 //     message.reply(`গালির রাজ্যে আপনাকে স্বাগতম${t.substr(8,t.length)}`)
 //   }
-
-
 //   //tornado command
 //   else if(t.includes('%tornado')){
 //     if(message.author.discriminator == '8573' || message.author.id == "851753629149167657" || message.author.id == "858605545266348052"){
@@ -161,7 +149,6 @@ client.once('ready', () => {
 //         message.reply(`${t.substr(8,t.length)} ${v.gali}`)
 //       })
 //     }
- 
 //     // else if(message.author.discriminator = '5291'){
 //     //   galis.map((v,i)=>{
 //     //     message.reply(`${t.substr(8,t.length)} ${v.gali}`)
@@ -171,7 +158,6 @@ client.once('ready', () => {
 //       message.reply('shob command shobar jonno na baba')
 //     }
 //   }
-
 //   //addgali command
 //   else if(t.includes('%addgali')){ 
 //     addgali(t,message).catch((e)=>{
@@ -189,7 +175,6 @@ client.once('ready', () => {
 //         message.reply('tor baaper chakor ami?')
 //     }
 //   }
-  
 //   //meme send command
 //   // else if(t.includes('%meme')){
 //   // axios.get('https://meme-api.herokuapp.com/gimme').then(res =>{
@@ -199,8 +184,6 @@ client.once('ready', () => {
 //   //     console.log(e)
 //   //  })
 //   // }
-
-  
 //   //gaali amount command
 //   else if(t.includes('%amount')){
 //     message.reply(`total: ${galis.length} gali(s)`)
@@ -228,15 +211,11 @@ client.once('ready', () => {
 //           //err is an error
 //       });
 //     })
-    
 //   }
 // });
-
-app.get('/',(req:Request,res:Response)=>{
-  res.status(200).json({suck:'Saxxx'})
-})
-
-
+app.get('/', (req, res) => {
+    res.status(200).json({ suck: 'Saxxx' });
+});
 client.login(process.env.BOT_TOKEN);
-app.listen(PORT,()=> console.log('Server started🔥'))
-
+app.listen(PORT, () => console.log('Server started🔥'));
+//# sourceMappingURL=index.js.map

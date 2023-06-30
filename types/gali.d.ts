@@ -1,0 +1,5 @@
+type Gali = {
+
+}
+
+export {Gali}

@@ -8,6 +8,9 @@ model Gali {
   id      Int     @id @default(autoincrement())
   author  String
   gali    String
+  discriminator Int
+  created DateTime @default(now())
+  photo String
 }
 
 datasource db {

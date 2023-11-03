@@ -103,7 +103,84 @@ client.on('messageCreate', async message => {
         message.channel.send(`${target} ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`)
     }
   }
+  if(t.includes('%toton')){
+    const voiceChannel = message.member?.voice.channel;
+    if (!voiceChannel) {
+      return message.reply('You need to be in a voice channel to use this command!');
+    }
+    // Join the voice channel
+    const connection = joinVoiceChannel({
+      channelId: voiceChannel.id,
+      guildId: voiceChannel.guild.id,
+      adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+    });
 
+    // Play a sound
+    const player = createAudioPlayer();
+    const resource = createAudioResource(`${__dirname}/assets/audio/totonkop.mp3`);
+    connection.subscribe(player);
+    player.play(resource);
+
+    // Handle errors and cleanup
+    player.on('idle', () => {
+      connection.destroy();
+    });
+    connection.on('disconnect', () => {
+      player.stop();
+    });
+  }
+  if(t.includes('%shonartoton')){
+    const voiceChannel = message.member?.voice.channel;
+    if (!voiceChannel) {
+      return message.reply('You need to be in a voice channel to use this command!');
+    }
+    // Join the voice channel
+    const connection = joinVoiceChannel({
+      channelId: voiceChannel.id,
+      guildId: voiceChannel.guild.id,
+      adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+    });
+
+    // Play a sound
+    const player = createAudioPlayer();
+    const resource = createAudioResource(`${__dirname}/assets/audio/totonshona.mp3`);
+    connection.subscribe(player);
+    player.play(resource);
+
+    // Handle errors and cleanup
+    player.on('idle', () => {
+      connection.destroy();
+    });
+    connection.on('disconnect', () => {
+      player.stop();
+    });
+  }
+  if(t.includes('%aihay')){
+    const voiceChannel = message.member?.voice.channel;
+    if (!voiceChannel) {
+      return message.reply('You need to be in a voice channel to use this command!');
+    }
+    // Join the voice channel
+    const connection = joinVoiceChannel({
+      channelId: voiceChannel.id,
+      guildId: voiceChannel.guild.id,
+      adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+    });
+
+    // Play a sound
+    const player = createAudioPlayer();
+    const resource = createAudioResource(`${__dirname}/assets/audio/aihai.mp3`);
+    connection.subscribe(player);
+    player.play(resource);
+
+    // Handle errors and cleanup
+    player.on('idle', () => {
+      connection.destroy();
+    });
+    connection.on('disconnect', () => {
+      player.stop();
+    });
+  }
   if(t.includes('%moan')){
     const voiceChannel = message.member?.voice.channel;
     if (!voiceChannel) {
@@ -173,7 +250,7 @@ client.on('messageCreate', async message => {
 
   //tornado command
   else if(t.includes('%tornado')){
-    if(message.author.discriminator == '8573' || message.author.id == "851753629149167657" || message.author.id == "858605545266348052"){
+    if(message.author.discriminator == '8573' || message.author.id == "851753629149167657" || message.author.id == "544406696563572739"){
       galis.map((v,i)=>{
         message.reply(`${t.substr(8,t.length)} ${v.gali}`)
       })
@@ -194,7 +271,7 @@ client.on('messageCreate', async message => {
     addgali(t,message).catch((e)=>{
       //console.log(e)
     })
-  }
+  } 
   //semi tornado command
   else if(t.includes('%fixed')){
     if(message.author.id == '544406696563572739' || message.author.discriminator == '5291'){

@@ -250,7 +250,7 @@ client.on('messageCreate', async message => {
 });
 
 app.get('/',(req,res)=>{
-  res.status(200).json({suck:'Saxxx'})
+  res.status(200).json({suck:'Sex'})
 })
 
 

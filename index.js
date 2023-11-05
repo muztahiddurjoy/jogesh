@@ -1,13 +1,12 @@
 const { default: axios } = require('axios');
 const { Client, Intents, MessageAttachment } = require('discord.js');
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus, VoiceConnectionStatus } = require('@discordjs/voice');
-const express = require('express')
 const client = new Client({intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_VOICE_STATES,Intents.FLAGS.GUILD_MESSAGES]});
 const { TextChannel } = require('discord.js')
 const fetch = require('node-fetch')
-const art = require('ascii-art')
-const app = express()
-const PORT = process.env.PORT | 300
+const art = require('ascii-art');
+const connectDB = require('./db/connection');
+const PORT = process.env.PORT | 3000
 require('dotenv').config()
 
 //main gali array
@@ -326,11 +325,9 @@ client.on('messageCreate', async message => {
   }
 });
 
-app.get('/',(req,res)=>{
-  res.status(200).json({suck:'Sex'})
-})
+connectDB().then(()=>{
+   console.log('Connected with database')
+   client.login(process.env.BOT_TOKEN);
+}).catch((err)=> console.log(err))
 
-
-client.login(process.env.BOT_TOKEN);
-app.listen(PORT,()=> console.log('Server started🔥'))
 

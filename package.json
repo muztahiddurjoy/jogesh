@@ -8,6 +8,7 @@
     "@discordjs/voice": "^0.16.0",
     "ascii-art": "^2.8.5",
     "axios": "^0.24.0",
+    "canvas": "^2.11.2",
     "chalk": "^5.0.0",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
@@ -16,6 +17,7 @@
     "ffmpeg-static": "^5.1.0",
     "firebase": "^9.6.0",
     "libsodium-wrappers": "^0.7.11",
+    "mongoose": "^8.0.0",
     "ytdl-core": "^4.11.4"
   },
   "scripts": {
@@ -25,8 +27,5 @@
     "gali"
   ],
   "author": "Muztahid Durjoy",
-  "license": "ISC",
-  "engines": {
-    "node": "16.19.1"
-  }
+  "license": "ISC"
 }

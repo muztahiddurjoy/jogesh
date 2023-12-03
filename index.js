@@ -21,6 +21,7 @@ const reloadgali = async () =>{
 }
 //addgali function
 const addgali  = async  (t,message) =>{
+  
   await axios.put(`${process.env.FIREBASE_LINK}/${new Date().getTime()}.json`,{gali:t.substr(8,t.length),author: message.author.username}).then(()=>{
     reloadgali().then(()=>{
       message.reply(`The gali ${t.substr(8,t.length)} has been added to the dictionary`)
@@ -101,6 +102,9 @@ client.on('messageCreate', async message => {
         message.react('🐄')
         message.channel.send(`${target} ${galis[Math.floor(Math.random() * (galis.length - 0))].gali}`)
     }
+  }
+  if(t.includes("%hiddengali")){
+    
   }
   if(t.includes('%toton')){
     const voiceChannel = message.member?.voice.channel;
@@ -249,7 +253,7 @@ client.on('messageCreate', async message => {
 
   //tornado command
   else if(t.includes('%tornado')){
-    if(message.author.discriminator == '8573' || message.author.id == "851753629149167657" || message.author.id == "544406696563572739"){
+    if(message.author.discriminator == '8573' || message.author.id == "851753629149167657" || message.author.id == "544406696563572739" || message.author.id=="852837117528768514"){
       galis.map((v,i)=>{
         message.reply(`${t.substr(8,t.length)} ${v.gali}`)
       })

@@ -329,9 +329,9 @@ client.on('messageCreate', async message => {
   }
 });
 
-connectDB().then(()=>{
-   console.log('Connected with database')
+// connectDB().then(()=>{
+  //  console.log('Connected with database')
    client.login(process.env.BOT_TOKEN);
-}).catch((err)=> console.log(err))
+// }).catch((err)=> console.log(err))
 
 
